@@ -1,6 +1,6 @@
-def polinomio_legendre(datos, x=var('x')):
+def polinomio_leggrange(datos, x=var('x')):
     """
-    Subrutina para calcular el polinomio de interpolación de Legendre
+    Subrutina para calcular el polinomio de interpolación de Lagrange
     ---------------------------------------------
     datos: nube de puntos
     x    : punto de evaluación (opcional; si no se especifica, la subrutina
@@ -10,17 +10,17 @@ def polinomio_legendre(datos, x=var('x')):
     ---------------------------------------------
     datos = [(1.2,0.079181), (1.6,0.204120), (2.1,0.322219), (2.5, 0.397940),
              (2.7,0.431364)]
-    polinomio_legendre(datos)
+    polinomio_lagrange(datos)
     ---------------------------------------------
     datos = [(1.2,0.079181), (1.6,0.204120), (2.1,0.322219), (2.5, 0.397940),
              (2.7,0.431364)]
-    polinomio_legendre(datos, 2.3)
+    polinomio_lagrange(datos, 2.3)
     ---------------------------------------------
     """
     n = len(datos)  # cantidad de puntos
-    L = 0  # polinomio de interpolacidón de Legendre
+    L = 0  # polinomio de interpolacidón de Lagrange
     for i in range(n):
-        # i-ésimo polinomio de Legendre:
+        # i-ésimo polinomio de Lagrange:
         L_i = 1
         for j in range(n):
             if (j != i):
