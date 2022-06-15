@@ -1,6 +1,6 @@
 def gauss(A, b):
     """
-    Implementación computacional del método de reudcción Gaussiana para sistemas
+    Implementación computacional del método de reducción Gaussiana para sistemas
     de ecauciones lineales.
     ---------------------------------------------
     A: matriz asociada del sistema
@@ -13,24 +13,29 @@ def gauss(A, b):
     x = gauss(A, b)
     ---------------------------------------------
     """
-    n = len(b)
-    b = matrix(n,1,b)
+    n = len(b)  # tamaño del sistema
+    b = matrix(n, 1, b)  # para poder realizar operaciones elementales por filas
     for i in range(n):
-        piv = abs(A[i,i])
-        r_piv = i
-        for j in range(i+1, n):
-            if (abs(A[j,i]) > piv):
-                piv = A[j,i]
-                r_piv = j
-        b = b.with_swapped_rows(i, r_piv)
-        A = A.with_swapped_rows(i, r_piv)
+        piv = A[i,i]  # pivote
+        f_piv = i  # fila del pivote
+        for k in range(i+1, n):
+            if (abs(A[k,i]) > abs(piv)):
+                piv = A[k,i]
+                f_piv = k
+        # Pivote a la diagonal:
+        b = b.with_swapped_rows(i, f_piv)
+        A = A.with_swapped_rows(i, f_piv)
+        # Eliminación de elementos debajo del pivote:
         for k in range(i+1, n):
             b = b.with_added_multiple_of_row(k, i, -A[k,i]/A[i,i])
             A = A.with_added_multiple_of_row(k, i, -A[k,i]/A[i,i])
+
+    # Sustitución inversa:
     x = vector(RR, n)
+    b = vector(b)
     for i in range(n-1, -1, -1):
-        x[i] = b[i,0]
-        for j in range(i+1, n):
-            x[i] -= A[i,j] * x[j]
+        x[i] = b[i]
+        for k in range(i+1, n):
+            x[i] -= A[i,k] * x[k]
         x[i] /= A[i,i]
     return x
