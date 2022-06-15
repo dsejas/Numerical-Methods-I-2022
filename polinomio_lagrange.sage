@@ -1,4 +1,4 @@
-def polinomio_leggrange(datos, x=var('x')):
+def polinomio_lagrange(datos, x=var('x')):
     """
     Subrutina para calcular el polinomio de interpolación de Lagrange
     ---------------------------------------------
