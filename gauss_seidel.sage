@@ -3,7 +3,7 @@ def gauss_seidel(A, b, tol=10^-5):
     Implementación computacional del método de Gauss-Seidel para sistemas de
     ecuaciones lineales.
     ---------------------------------------------
-    A  : matris asociada del sistema
+    A  : matriz asociada del sistema
     b  : vector de términos independientes
     tol: tolerancia del error
     ---------------------------------------------
@@ -34,7 +34,7 @@ def gauss_seidel(A, b, tol=10^-5):
     err = float('inf')  # garantiza una iteración del bucle
     while (err >= tol):
         for i in range(n):
-            x[i] = C.row(i)*x_ant + D[i]
+            x[i] = C.row(i)*x + D[i]
         err = (x - x_ant).norm()  # error absoluto
         x_ant = x[:]  # copia sin alias
     return x
